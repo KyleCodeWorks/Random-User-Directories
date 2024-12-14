@@ -1,4 +1,5 @@
 <script setup>
+import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import axios from 'axios';
 import { reactive, ref } from 'vue';
 import { userStore, addUser } from '@/stores/userStore.js';
@@ -15,6 +16,7 @@ const user = ref({
 let idCounter = 1;
 
 const fetchUser = (async () => {
+    userStore.isLoading = true; // Set loading state
     try {
         // const response = await axios.get('https://devnorth-ais-tadeco.anflocor.com/db/api.php');
         // const userInfo = response.data;
@@ -36,6 +38,8 @@ const fetchUser = (async () => {
         console.log('All Users:', userStore.users);
     } catch (error) {
         console.error("Error Fetching User", error);
+    } finally {
+        userStore.isLoading = false; // Reset loading state
     }
 });
 </script>
@@ -59,8 +63,13 @@ const fetchUser = (async () => {
                         <p class="text-sm sm:text-base text-neutral/70">{{ user.email || 'Lorem Ipsum' }}</p>
                     </div>
                     <!-- Button -->
-                    <button @click="fetchUser" class="btn btn-primary mt-4 sm:mt-6 px-4 sm:px-6 py-2">Fetch
-                        user</button>
+                    <button 
+                    @click="fetchUser" 
+                    :disabled="userStore.isLoading"
+                    class="btn btn-primary mt-4 sm:mt-6 px-4 sm:px-6 py-2">
+                        <PulseLoader v-if="userStore.isLoading" color="#fff" size="8px" />
+                        <span v-if="!userStore.isLoading">Fetch User</span>
+                    </button>
                 </div>
             </div>
         </div>
