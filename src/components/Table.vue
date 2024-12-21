@@ -2,10 +2,11 @@
 import PulseLoader from 'vue-spinner/src/PulseLoader.vue';
 import { userStore } from '@/stores/userStore.js';
 import { computed, ref } from 'vue';
+import { RouterLink } from 'vue-router';
 
 // Pagination state
 const currentPage = ref(1);
-const pageSize = ref(5); // Number of rows per page
+const pageSize = ref(7); // Number of rows per page
 
 // Computed property for paginated data
 const paginatedUsers = computed(() => {
@@ -58,10 +59,14 @@ const goToPage = (page) => {
             <td>{{ user.location }}</td>
             <td>{{ user.email }}</td>
             <td class="flex justify-center items-center gap-2">
-              <button class="btn btn-sm btn-outline btn-primary flex items-center gap-1">
+              <RouterLink
+                :to="'/userDetails/' + user.id"
+                class="btn btn-sm btn-outline btn-primary flex items-center gap-1"
+              >
                 <i class="pi pi-external-link"></i>
                 View
-              </button>
+              </RouterLink>
+
               <button class="btn btn-sm btn-outline btn-secondary flex items-center gap-1">
                 <i class="pi pi-trash"></i>
                 Delete

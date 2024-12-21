@@ -1,7 +1,11 @@
 <script setup>
+import { RouterLink } from 'vue-router';
+
+
 </script>
 <template>
-    <div class="navbar bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]">
+    <div
+        class="navbar bg-base-100 text-base-content sticky top-0 z-30 flex h-16 w-full bg-opacity-90 backdrop-blur transition-shadow duration-100 [transform:translate3d(0,0,0)]">
         <div class="navbar-start">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
@@ -13,16 +17,32 @@
                 </div>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                    <li><a>Home</a></li>
-                    <li><a>User Directory</a></li>
+                    <li>
+                        <RouterLink to="/">
+                            Home
+                        </RouterLink>
+                    </li>
+                    <li>
+                        <RouterLink to="/userDirectory/">
+                            User Directory
+                        </RouterLink>
+                    </li>
                 </ul>
             </div>
             <a class="btn btn-ghost text-xl">Hexaxios</a>
         </div>
         <div class="navbar-end hidden lg:flex">
             <ul class="menu menu-horizontal px-1">
-                <li><a>Home</a></li>
-                <li><a>User Directory</a></li>
+                <li>
+                    <RouterLink to="/">
+                        Home
+                    </RouterLink>
+                </li>
+                <li>
+                    <RouterLink to="/userDirectory/">
+                        User Directory
+                    </RouterLink>
+                </li>
             </ul>
         </div>
     </div>
